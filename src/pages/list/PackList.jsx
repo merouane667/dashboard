@@ -1,0 +1,112 @@
+import React, { useState, useEffect } from 'react';
+import "./list.scss";
+import Sidebar from "../../components/sidebar/Sidebar";
+import Navbar from "../../components/navbar/Navbar";
+import { Box, CircularProgress } from '@mui/material';
+import { DataGrid } from "@mui/x-data-grid";
+import { Link } from "react-router-dom";
+import useLocalStorageCheck from '../../components/tokenCheck/useLocalStorageCheck';
+import axios from 'axios';
+
+
+const columns = [
+  { field: 'pack_id', headerName: 'ID', width: 70 },
+  { field: 'pack_name', headerName: 'Pack name', width: 130 },
+  { field: 'pack_description', headerName: 'Description', width: 590 },
+  {
+    field: "pack_status",
+    headerName: "Status",
+    width: 160,
+    renderCell: (params) => {
+      return (
+        <div className={`cellWithStatus ${params.row.pack_status}`}>
+          {params.row.pack_status}
+        </div>
+      );
+    },
+  },
+];
+
+
+const rows = [];
+
+const PackList = () => {
+  const [showLoader, setShowLoader] = useState(true);
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    const loaderTimeout = setTimeout(() => {
+      setShowLoader(false);
+    }, 900);
+
+    return () => {
+      clearTimeout(loaderTimeout);
+    };
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const headers = {
+          'rmpubs-access-token': localStorage.getItem("accessToken")
+        };
+        const response = await axios.get('https://rm-pubs-lpmp9.ondigitalocean.app/api/packs', { headers });
+        const packs = response.data;
+        setRows(packs);
+        setShowLoader(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useLocalStorageCheck('accessToken');
+
+  return (
+    <div className="list">
+      {showLoader ? (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100vw',
+            height: '100vh',
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
+          <Sidebar />
+          <div className="listContainer">
+            <Navbar />
+            <div className="datatable">
+            <div className="datatableTitle">
+                Add New Pack
+                <Link to="/packs/new" className="link">
+                Add Pack
+                </Link>
+            </div>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              getRowId={(row) => row.pack_id}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 10 },
+                },
+              }}
+              pageSizeOptions={[5, 10]}
+            />
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
+export default PackList;
