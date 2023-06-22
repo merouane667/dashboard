@@ -1,7 +1,7 @@
 import "./sidebar.scss"
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import InsertChartIcon from "@mui/icons-material/InsertChart";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -9,6 +9,8 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import CategoryIcon from '@mui/icons-material/Category';
+import PaymentIcon from '@mui/icons-material/Payment';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
@@ -52,8 +54,20 @@ const Sidebar = () => {
           </Link>
           <Link to="/bookings" style={{textDecoration:"none"}}>
             <li>
-              <CreditCardIcon className="icon" />
+              <BookmarkIcon className="icon" />
               <span>Bookings</span>
+            </li>
+          </Link>
+          <Link to="/payments" style={{textDecoration:"none"}}>
+            <li>
+              <PaymentIcon className="icon" />
+              <span>Payments</span>
+            </li>
+          </Link>
+          <Link to="/categories" style={{textDecoration:"none"}}>
+            <li>
+              <CategoryIcon className="icon" />
+              <span>Categories</span>
             </li>
           </Link>
           <p className="title">USEFUL</p>

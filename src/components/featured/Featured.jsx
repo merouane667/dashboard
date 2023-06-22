@@ -23,7 +23,8 @@ const Featured = () => {
           'rmpubs-access-token': localStorage.getItem('accessToken')
         };
         const response = await axios.get('https://rm-pubs-lpmp9.ondigitalocean.app/api/packs', { headers });
-        setPacks(response.data);
+        const packs = response.data.filter((pack) => pack.pack_status === "Active");
+        setPacks(packs);
       } catch (error) {
         console.error(error);
       }

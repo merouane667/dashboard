@@ -3,16 +3,18 @@ import axios from 'axios';
 import './new.scss';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
-import useLocalStorageCheck from '../../components/tokenCheck/useLocalStorageCheck';
+import useLocalStorageTokenCheck from '../../components/tokenCheck/useLocalStorageCheck';
+import useLocalStorageRoleCheck from '../../components/roleCheck/useLocalStorageCheck';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-const New = () => {
+const NewPack = () => {
   const [success, setSuccess] = useState(false);
   const [categories, setCategories] = useState([]);
   const [newCreatedPackId, setNewCreatedPackId] = useState([]);
   const navigate = useNavigate();
-  useLocalStorageCheck('accessToken');
-
+  useLocalStorageTokenCheck('accessToken');
+  useLocalStorageRoleCheck('role');
+  
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -100,7 +102,7 @@ const New = () => {
       document.getElementById('pack_option_duration').value = "";
       document.getElementById('pack_option_price').value = "";
       document.getElementById('pack_option_limit_number').value = "";
-      navigate("/packs");
+      alert("options added successfully to the pack!");
     } catch (error) {
       console.error(error);
       // Handle error response
@@ -183,4 +185,4 @@ const New = () => {
   );
 };
 
-export default New;
+export default NewPack;

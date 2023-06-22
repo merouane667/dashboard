@@ -76,4 +76,49 @@
     input{
         background-color: transparent;
     }
+
+    table{
+      background-color: #111;
+      thead{
+        tr{
+          th{
+            color: gray;
+          }
+        }
+      }
+      tbody{
+        tr{
+          td{
+            color: gray;
+          }
+        }
+      }
+    }
+
+    .modify{
+      .modifyContainer{
+        .bottom{
+          .formcontent{
+            form{
+              .formInput{
+                input{
+                  color: white!important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  .datatableTitleSinglePayment{
+    background-color: #111;
+
   }
+  .MuiPaper-root{
+    background-color: #111;
+
+  }
+}
+
+

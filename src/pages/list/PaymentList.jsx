@@ -9,63 +9,39 @@ import useLocalStorageTokenCheck from '../../components/tokenCheck/useLocalStora
 import useLocalStorageRoleCheck from '../../components/roleCheck/useLocalStorageCheck';
 import axios from 'axios';
 
+
 const columns = [
-  { field: 'pack_id', headerName: 'ID', width: 70 },
-  { field: 'pack_name', headerName: 'Pack name', width: 210 },
-  { field: 'pack_description', headerName: 'Description', width: 400 },
+  { field: 'payment_id', headerName: 'ID', width: 70 },
+  { field: 'payment_reference', headerName: 'Payment reference', width: 200 },
   {
-    field: "pack_options",
-    headerName: "Options",
-    width: 160,
+    field: "payment_user",
+    headerName: "User name",
+    width: 200,
     renderCell: (params) => {
       return (
-        <Link to={`/options/pack/${params.row.pack_id}`}>View Options</Link>
-      );
-    },
-  },
-  {
-    field: "pack_status",
-    headerName: "Status",
-    width: 80,
-    renderCell: (params) => {
-      return (
-        <div className={`cellWithStatus ${params.row.pack_status}`}>
-          {params.row.pack_status}
+        <div>
+          {params.row.user.user_firstname+" "+params.row.user.user_lastname}
         </div>
       );
     },
   },
+  { field: 'payment_method', headerName: 'Payment method', width: 200 },
+  { field: 'payment_total', headerName: 'Total', width: 150 },
   {
-    field: "pack_action",
-    headerName: "Action",
-    width: 80,
+    field: "payment_status",
+    headerName: "Status",
+    width: 200,
     renderCell: (params) => {
-      const handleDelete = async (packId) => {
-        try {
-          const headers = {
-            'rmpubs-access-token': localStorage.getItem("accessToken")
-          };
-          await axios.put(`https://rm-pubs-lpmp9.ondigitalocean.app/api/packs/${packId}`, { pack_status: "Inactive" }, { headers });
-          window.location.reload(true);
-        } catch (error) {
-          console.error(error);
-        }
-      };
-
       return (
-        <div
-          className={`deletePackAction`}
-          id={params.row.pack_id}
-          onClick={() => handleDelete(params.row.pack_id)}
-        >
-          Delete
+        <div className='status'>
+          {params.row.payment_status}
         </div>
       );
     },
   },
 ];
 
-const PackList = () => {
+const PaymentList = () => {
   const [showLoader, setShowLoader] = useState(true);
   const [rows, setRows] = useState([]);
 
@@ -79,21 +55,21 @@ const PackList = () => {
     };
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const headers = {
-        'rmpubs-access-token': localStorage.getItem("accessToken")
-      };
-      const response = await axios.get('https://rm-pubs-lpmp9.ondigitalocean.app/api/packs', { headers });
-      const packs = response.data.filter((pack) => pack.pack_status === "Active");
-      setRows(packs);
-      setShowLoader(false);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const headers = {
+          'rmpubs-access-token': localStorage.getItem("accessToken")
+        };
+        const response = await axios.get('https://rm-pubs-lpmp9.ondigitalocean.app/api/payments', { headers });
+        const payments = response.data;
+        setRows(payments);
+        setShowLoader(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     fetchData();
   }, []);
 
@@ -120,16 +96,13 @@ const PackList = () => {
           <div className="listContainer">
             <Navbar />
             <div className="datatable">
-              <div className="datatableTitle">
-                Add New Pack
-                <Link to="/packs/new" className="link">
-                  Add Pack
-                </Link>
+            <div className="datatableTitle">
+                Payments List
               </div>
               <DataGrid
                 rows={rows}
                 columns={columns}
-                getRowId={(row) => row.pack_id}
+                getRowId={(row) => row.payment_id}
                 initialState={{
                   pagination: {
                     paginationModel: { page: 0, pageSize: 10 },
@@ -145,4 +118,6 @@ const PackList = () => {
   );
 };
 
-export default PackList;
+
+
+export default PaymentList;

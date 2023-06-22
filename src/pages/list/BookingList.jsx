@@ -4,15 +4,33 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import { Box, CircularProgress } from '@mui/material';
 import { DataGrid } from "@mui/x-data-grid";
-import useLocalStorageCheck from '../../components/tokenCheck/useLocalStorageCheck';
+import { Link } from "react-router-dom";
+import useLocalStorageTokenCheck from '../../components/tokenCheck/useLocalStorageCheck';
+import useLocalStorageRoleCheck from '../../components/roleCheck/useLocalStorageCheck';
 import axios from 'axios';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 70 },
   { field: 'booking_userid', headerName: 'Customer', width: 130, valueGetter: (params) => params.row.user.user_lastname+" "+params.row.user.user_firstname },
-  { field: 'booking_packid', headerName: 'Pack', width: 130 },
+  {
+    field: "booking_pack_name",
+    headerName: "Pack name",
+    width: 130,
+    valueGetter: (params) => params.row.pack_option ? params.row.pack_option.pack.pack_name : ""
+  },
   { field: 'booking_week', headerName: 'Booking week', width: 130 },
-  { field: 'booking_text', headerName: 'Booking text', width: 130 },
+  {
+    field: "booking_text",
+    headerName: "Booking text",
+    width: 130,
+    renderCell: (params) => {
+      return (
+        <div>
+          {params.booking_text == null ? "empty":params.booking_text}
+        </div>
+      );
+    },
+  },
   {
     field: "booking_audio_path",
     headerName: "Booking audio",
@@ -25,6 +43,21 @@ const columns = [
           </a>
         </div>
       );
+    },
+  },
+  {
+    field: "booking_paymentid",
+    headerName: "View payment",
+    width: 160,
+    renderCell: (params) => {
+      if(params.row.booking_paymentid != "Pending") {
+        return(
+          <Link to={`/payments/${params.row.booking_paymentid}`}>View Payment</Link>
+        )
+      }
+      return(
+        "payment pending"
+      )
     },
   },
   {
@@ -79,7 +112,10 @@ const BookingList = () => {
     };
   }, []);
 
-  useLocalStorageCheck('accessToken');
+  useLocalStorageTokenCheck('accessToken');
+  useLocalStorageRoleCheck('role');
+
+
 
   return (
     <div className="list">
@@ -101,6 +137,9 @@ const BookingList = () => {
           <div className="listContainer">
             <Navbar />
             <div className="datatable">
+              <div className="datatableTitle">
+                Booking List
+              </div>
               <DataGrid
                 rows={bookings}
                 columns={columns}

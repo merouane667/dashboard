@@ -14,8 +14,9 @@ const Widget = ({ type }) => {
 
   const getUsersAndBookingsCount = async () => {
     try {
+      const accessToken = localStorage.getItem('accessToken');
       const headers = {
-        'rmpubs-access-token': localStorage.getItem('accessToken')
+        'rmpubs-access-token': accessToken,
       };
   
       // Retrieve users
@@ -26,25 +27,37 @@ const Widget = ({ type }) => {
       const bookingsResponse = await axios.get('https://rm-pubs-lpmp9.ondigitalocean.app/api/bookings', { headers });
       const bookingsCount = bookingsResponse.data.length;
   
-      // Store the counts in variables or state
+      // Retrieve payments
+      const paymentsResponse = await axios.get('https://rm-pubs-lpmp9.ondigitalocean.app/api/payments', { headers });
+      const payments = paymentsResponse.data;
+  
+      // Calculate total payment amount
+      const totalAmount = payments.reduce((total, payment) => total + payment.payment_total, 0);
+  
+      // Store the counts and total amount in variables or state
       console.log('Users Count:', usersCount);
       console.log('Bookings Count:', bookingsCount);
+      console.log('Total Payment Amount:', totalAmount);
   
-      // Return the counts if needed
-      return { usersCount, bookingsCount };
+      // Return the counts and total amount if needed
+      return { usersCount, bookingsCount, totalAmount };
     } catch (error) {
       console.error(error);
     }
   };
+  
 
   const [usersCount, setUsersCount] = useState(0);
   const [bookingsCount, setBookingsCount] = useState(0);
+  const [amountCount, setAmountCount] = useState(0);
+
 
   useEffect(() => {
     const fetchData = async () => {
       const counts = await getUsersAndBookingsCount();
       setUsersCount(counts.usersCount);
       setBookingsCount(counts.bookingsCount);
+      setAmountCount(counts.totalAmount);
     };
 
     fetchData();
@@ -104,7 +117,7 @@ const Widget = ({ type }) => {
           />
         ),
       };
-      amount = 31500;
+      amount = amountCount;
       diff = 9;
       
       break;

@@ -8,9 +8,15 @@
 
 
 .datatable {
-  height: 450px;
+  height: 550px;
   padding: 20px;
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .addOptionLink{
+    font-size: 1.2rem;
+  }
   .datatableTitle{
     width: 100%;
     font-size: 24px;
@@ -31,28 +37,11 @@
       cursor: pointer;
     }
   }
-
-
   .cellAction {
     display: flex;
     align-items: center;
     gap: 15px;
 
-    .viewButton {
-      padding: 2px 5px;
-      border-radius: 5px;
-      color: darkblue;
-      border: 1px dotted rgba(0, 0, 139, 0.596);
-      cursor: pointer;
-    }
-    
-    .deleteButton {
-      padding: 2px 5px;
-      border-radius: 5px;
-      color: crimson;
-      border: 1px dotted rgba(220, 20, 60, 0.6);
-      cursor: pointer;
-    }
   }
 }
 
@@ -67,5 +56,45 @@
   &.Pending {
     background-color: rgba(25, 22, 22, 0.037);
     color: goldenrod;
+  }
+}
+
+.deletePackAction{
+  padding: 2px 5px;
+  border-radius: 5px;
+  color: crimson;
+  border: 1px dotted rgba(220, 20, 60, 0.6);
+  cursor: pointer;
+}
+.OptionStatus{
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 128, 0, 0.05);
+  color: green;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.categories_datatable{
+  height: 302px;
+  padding: 20px;
+  .datatableTitle{
+    width: 100%;
+    font-size: 24px;
+    color: gray;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .link{
+    text-decoration: none;
+    color: green;
+    font-size: 16px;
+    font-weight: 400;
+    border: 1px solid green;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
   }
 }

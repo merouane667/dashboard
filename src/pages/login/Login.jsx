@@ -30,6 +30,7 @@ const Login = () => {
       if (response.status === 200) {
         setSuccess(true);
         localStorage.setItem('accessToken', response.data.accessToken);
+        localStorage.setItem('role', response.data.roles);
       }
     } catch (error) {
       console.error(error); // Log any errors that occurred during the request

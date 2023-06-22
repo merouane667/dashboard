@@ -1,84 +1,90 @@
-.single {
+.list {
     display: flex;
     width: 100%;
-    .singleContainer {
+    .listContainer {
       flex: 6;
+    }
+  }
   
-      .top {
-        padding: 20px;
-        display: flex;
-        gap: 20px;
   
-        .left {
-          flex: 1;
-          -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-          box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-          padding: 20px;
-          position: relative;
+  .datatable {
+    height: 450px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .addOptionLink{
+      font-size: 1.2rem;
+    }
+    
+    
+    .datatableTitle{
+      width: 100%;
+      font-size: 24px;
+      color: gray;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
   
-          .editButton {
-            position: absolute;
-            top: 0;
-            right: 0;
-            padding: 5px;
-            font-size: 12px;
-            color: #7451f8;
-            background-color: #7551f818;
-            cursor: pointer;
-            border-radius: 0px 0px 0px 5px;
-          }
-  
-          .item {
-            display: flex;
-            gap: 20px;
-  
-            .itemImg {
-              width: 100px;
-              height: 100px;
-              border-radius: 50%;
-              object-fit: cover;
-            }
-  
-            .details {
-              .itemTitle {
-                margin-bottom: 10px;
-                color: #555;
-              }
-  
-              .detailItem {
-                margin-bottom: 10px;
-                font-size: 14px;
-  
-                .itemKey {
-                  font-weight: bold;
-                  color: gray;
-                  margin-right: 5px;
-                }
-  
-                .itemValue {
-                  font-weight: 300;
-                }
-              }
-            }
-          }
-        }
-  
-        .right {
-          flex: 2;
-        }
-      }
-  
-      .bottom {
-        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-        padding: 20px;
-        margin: 10px 20px;
-      }
-  
-      .title {
+      .link{
+        text-decoration: none;
+        color: green;
         font-size: 16px;
-        color: lightgray;
-        margin-bottom: 20px;
+        font-weight: 400;
+        border: 1px solid green;
+        padding: 5px;
+        border-radius: 5px;
+        cursor: pointer;
       }
     }
+  
+  
+    .cellAction {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+  
+    }
+  }
+  
+  .cellWithStatus {
+    padding: 5px;
+    border-radius: 5px;
+  
+    &.Active {
+      background-color: rgba(0, 128, 0, 0.05);
+      color: green;
+    }
+    &.Pending {
+      background-color: rgba(25, 22, 22, 0.037);
+      color: goldenrod;
+    }
+  }
+  
+  .deletePackAction{
+    padding: 2px 5px;
+    border-radius: 5px;
+    color: crimson;
+    border: 1px dotted rgba(220, 20, 60, 0.6);
+    cursor: pointer;
+  }
+  .OptionStatus{
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 128, 0, 0.05);
+    color: green;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  .datatableTitleSinglePayment{
+    width: 100%;
+    font-size: 24px;
+    color: gray;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
   }
