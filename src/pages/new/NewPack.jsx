@@ -28,7 +28,7 @@ const NewPack = () => {
           { headers }
         );
 
-        setCategories(response.data);
+        setCategories(response.data.filter((pack) => pack.client_category_status === "Active"));
       } catch (error) {
         console.error(error);
         // Handle error response

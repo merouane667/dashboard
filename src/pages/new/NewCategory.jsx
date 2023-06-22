@@ -16,7 +16,6 @@ const NewCategory = () => {
     event.preventDefault();
 
     const categoryName = document.getElementById('client_category_name').value;
-    const categoryStatus = document.getElementById('client_category_status').value;
 
     try {
       const accessToken = localStorage.getItem('accessToken');
@@ -28,7 +27,6 @@ const NewCategory = () => {
         'https://rm-pubs-lpmp9.ondigitalocean.app/api/client_categories',
         {
             client_category_name: categoryName,
-            client_category_status: categoryStatus,
         },
         { headers }
       );
@@ -36,7 +34,6 @@ const NewCategory = () => {
 
       //empty the inputs
       document.getElementById('client_category_name').value ="";
-      document.getElementById('client_category_status').value ="";
     } catch (error) {
       console.error(error);
       // Handle error response
@@ -59,10 +56,6 @@ const NewCategory = () => {
                   <div className="formInput">
                     <label htmlFor="client_category_name">Category Name</label>
                     <input type="text" id="client_category_name" required/>
-                  </div>
-                  <div className="formInput">
-                    <label htmlFor="client_category_status" >Category Status</label>
-                    <input type="text" id="client_category_status" placeholder='Active or Inactive' required/>
                   </div>
                   <button type="submit">Send</button>
                 </form>

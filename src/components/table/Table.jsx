@@ -38,7 +38,7 @@ const List = () => {
           <TableRow>
             <TableCell className="tableCell">ID</TableCell>
             <TableCell className="tableCell">Payment Reference</TableCell>
-            <TableCell className="tableCell">User ID</TableCell>
+            <TableCell className="tableCell">User</TableCell>
             <TableCell className="tableCell">Payment Method</TableCell>
             <TableCell className="tableCell">Payment Total</TableCell>
             <TableCell className="tableCell">Payment Status</TableCell>
@@ -49,7 +49,7 @@ const List = () => {
             <TableRow key={payments.payment_id}>
               <TableCell className="tableCell">{payments.payment_id}</TableCell>
               <TableCell className="tableCell">{payments.payment_reference == null ? "empty":payments.payment_reference}</TableCell>
-              <TableCell className="tableCell">{payments.payment_userid}</TableCell>
+              <TableCell className="tableCell">{payments.user.user_firstname+" "+payments.user.user_lastname}</TableCell>
               <TableCell className="tableCell">{payments.payment_method}</TableCell>
               <TableCell className="tableCell">{payments.payment_total}</TableCell>
               <TableCell className="tableCell">

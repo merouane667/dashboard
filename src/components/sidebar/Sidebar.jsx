@@ -39,55 +39,41 @@ const Sidebar = () => {
               <span>Dashboard</span>
             </li>
           </Link>
-          <p className="title">LISTS</p>
+          <p className="title">USER LIST</p>
           <Link to="/users" style={{textDecoration:"none"}}>
             <li>
               <PersonOutlineIcon className="icon" />
               <span>Users</span>
             </li>
           </Link>
+          <p className="title">PACK LIST</p>
           <Link to="/packs" style={{textDecoration:"none"}}>
             <li>
               <LocalOfferIcon className="icon" />
               <span>Packs</span>
             </li>
           </Link>
+          <p className="title">BOOKING LIST</p>
           <Link to="/bookings" style={{textDecoration:"none"}}>
             <li>
               <BookmarkIcon className="icon" />
               <span>Bookings</span>
             </li>
           </Link>
+          <p className="title">PAYMENT LIST</p>
           <Link to="/payments" style={{textDecoration:"none"}}>
             <li>
               <PaymentIcon className="icon" />
               <span>Payments</span>
             </li>
           </Link>
+          <p className="title">CATEGORY LIST</p>
           <Link to="/categories" style={{textDecoration:"none"}}>
             <li>
               <CategoryIcon className="icon" />
               <span>Categories</span>
             </li>
           </Link>
-          <p className="title">USEFUL</p>
-          <li>
-            <InsertChartIcon className="icon" />
-            <span>Stats</span>
-          </li>
-          <li>
-            <NotificationsNoneIcon className="icon" />
-            <span>Notifications</span>
-          </li>
-          <p className="title">SERVICE</p>
-          <li>
-            <PsychologyOutlinedIcon className="icon" />
-            <span>Logs</span>
-          </li>
-          <li>
-            <SettingsApplicationsIcon className="icon" />
-            <span>Settings</span>
-          </li>
           <p className="title">USER</p>
           <Link to="/" style={{textDecoration:"none"}}>
           <li onClick={handleLogout}>
