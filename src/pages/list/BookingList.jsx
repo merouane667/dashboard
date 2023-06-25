@@ -38,7 +38,7 @@ const columns = [
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          <a href='#'>
+          <a href={params.row.booking_audio_path}>
           {params.row.booking_audio_path}
           </a>
         </div>

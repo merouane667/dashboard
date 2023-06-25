@@ -39,6 +39,8 @@ const columns = [
     field: "pack_action",
     headerName: "Action",
     width: 80,
+    sortable: false, // Disable sorting for this column
+    filterable: false, // Disable filtering for this column
     renderCell: (params) => {
       const handleDelete = async (packId) => {
         try {

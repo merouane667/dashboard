@@ -4,6 +4,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+
 }
 :root {
 	--color-white: #ffffff;
@@ -51,7 +52,6 @@ body {
 	font-weight: normal;
 	line-height: 1.5;
 	color: var(--color-black);
-	background: var(--color-white);
 }
 
 a,
@@ -137,6 +137,8 @@ img {
 
 // login
 .login {
+	background: linear-gradient(#6439FF, #fff);
+    width: 100%;
 	.wrapper {
 		max-width: 28rem;
 		width: 100%;
@@ -144,9 +146,9 @@ img {
 		padding: 2rem 2.5rem;
 		border: none;
 		outline: none;
-		border-radius: 0.25rem;
+		border-radius: 1rem;
 		color: var(--color-black);
-		background: var(--color-light);
+		background: rgba(241,245,249,.3);
 		box-shadow: var(--shadow-large);
 
 		.form {

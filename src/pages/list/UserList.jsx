@@ -31,11 +31,7 @@ const CategoryCell = (params) => {
     fetchCategoryName();
   }, [params.row.user_categoryid]);
 
-  return (
-    <div>
-      {categoryName}
-    </div>
-  );
+  return categoryName;
 };
 
 const columns = [
@@ -44,15 +40,17 @@ const columns = [
   { field: 'user_lastname', headerName: 'Last name', width: 130 },
   { field: 'user_email', headerName: 'Email', width: 200 },
   {
-    field: "user_categoryid",
+    field: "user_category",
     headerName: "Category",
     width: 200,
+    sortable: false, // Disable sorting for this column
+    filterable: false, // Disable filtering for this column
     renderCell: CategoryCell,
   },
   { field: 'user_idcard', headerName: 'ID card', width: 130 },
   { field: 'user_phone', headerName: 'Phone', width: 130 },
   {
-    field: "booking_status",
+    field: "user_status",
     headerName: "Status",
     width: 160,
     renderCell: (params) => {
